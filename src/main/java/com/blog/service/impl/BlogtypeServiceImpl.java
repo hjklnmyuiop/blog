@@ -2,7 +2,7 @@ package com.blog.service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.blog.entity.Blogtype;
-import com.blog.dao.BlogtypeMapper;
+import com.blog.dao.ds1.BlogtypeMapper;
 import com.blog.service.BlogtypeService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.data.redis.core.RedisTemplate;

@@ -1,4 +1,4 @@
-package com.blog.dao;
+package com.blog.dao.ds1;
 
 import com.blog.entity.Comment;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;

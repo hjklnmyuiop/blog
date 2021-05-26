@@ -13,7 +13,7 @@ import java.io.Serializable;
  *
  * </p>
  *
- * @author KazuGin
+ * @author Dev_guo
  * @since 2019-10-11
  */
 @TableName("t_blog")

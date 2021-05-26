@@ -1,7 +1,7 @@
 package com.blog.service.impl;
 
 import com.blog.entity.Blogger;
-import com.blog.dao.BloggerMapper;
+import com.blog.dao.ds1.BloggerMapper;
 import com.blog.service.BloggerService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;

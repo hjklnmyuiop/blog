@@ -3,7 +3,7 @@ package com.blog.service.impl;
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.blog.entity.Blog;
-import com.blog.dao.BlogMapper;
+import com.blog.dao.ds1.BlogMapper;
 import com.blog.service.BlogService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.blog.utils.SysConstant;
@@ -20,7 +20,7 @@ import java.util.List;
  *  服务实现类
  * </p>
  *
- * @author KazuGin
+ * @author Dev_guo
  * @since 2019-10-11
  */
 @Service

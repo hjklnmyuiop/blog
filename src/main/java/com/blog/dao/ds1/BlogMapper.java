@@ -1,4 +1,4 @@
-package com.blog.dao;
+package com.blog.dao.ds1;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.blog.entity.Blog;
@@ -13,7 +13,7 @@ import java.util.List;
  *  Mapper 接口
  * </p>
  *
- * @author KazuGin
+ * @author Dev_guo
  * @since 2019-10-11
  */
 @Repository
