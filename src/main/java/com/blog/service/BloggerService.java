@@ -13,4 +13,14 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface BloggerService extends IService<Blogger> {
 
+
+    /**
+     * 根据博主名称查询博主信息
+     * @param userName
+     * @return
+     * @throws Exception
+     */
+    Blogger findBloggerByUserName(String userName) throws Exception;
+
 }
+
