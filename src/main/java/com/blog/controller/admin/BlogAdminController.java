@@ -1,6 +1,8 @@
 package com.blog.controller.admin;
 
 import com.alibaba.fastjson.JSON;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.blog.entity.Blog;
 import com.blog.lucene.BlogIndex;
 import com.blog.service.BlogService;
@@ -47,6 +49,21 @@ public class BlogAdminController {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return JSON.toJSONString(map);
+    }
+    @RequestMapping("blogManage")
+    public String blogManage(){
+        return "admin/blogManage";
+    }
+    @ResponseBody
+    @RequestMapping("/list")
+    public String list(Blog blog,Integer page,Integer rows){
+        Map<String,Object> map= new HashMap<>();
+        //创建分页对下，指定每页
+        Page<Blog> pageInfo = new Page<Blog>(page,rows);
+        IPage<Blog> blogIPage =  blogService.findBlogByPage(pageInfo,blog);
+        map.put("total",blogIPage.getTotal());
+        map.put("rows",blogIPage.getRecords());//数据类别
         return JSON.toJSONString(map);
     }
 }

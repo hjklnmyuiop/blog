@@ -155,7 +155,7 @@ public class BlogController {
         return pageCode.toString();
     }
 
-    @PostMapping("/query")
+    @RequestMapping("/query")
     public String query(String keyWord, @RequestParam(required = false,defaultValue = "1") Integer page, Model model){
         try {
             //每页显示的数量
@@ -169,6 +169,7 @@ public class BlogController {
             model.addAttribute("total",blogList.size());//查询的结果数量
             model.addAttribute("keyWord",keyWord);
             model.addAttribute("pageContent","foreign/blog/result");
+            model.addAttribute("pageCode",getUpAndDownPageCode(page,pageSize,blogList.size(),keyWord));
         } catch (Exception e) {
             e.printStackTrace();
         }
