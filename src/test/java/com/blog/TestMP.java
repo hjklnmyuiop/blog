@@ -17,9 +17,9 @@ public class TestMP {
     private static String outputDir ="d:\\java\\ceshi\\";//生成的位置
     private static String driver ="com.mysql.jdbc.Driver";//驱动，注意版本
     //连接路径,注意修改数据库名称
-    private static String url ="jdbc:mysql://192.168.10.10:3306/db_blog?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC";
-    private static String username ="homestead";//数据库用户名
-    private static String password ="secret";//数据库密码
+    private static String url ="jdbc:mysql://47.107.65.114:3306/db_blog?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC";
+    private static String username ="root";//数据库用户名
+    private static String password ="gqa123";//数据库密码
     private static String tablePrefix ="t_";//数据库表的前缀，如tbl_user
     private static String [] tables = {"t_blog","t_blogger","t_blogtype","t_comment"};	//生成的表
     private static String parentPackage = "com.blog";//顶级包结构

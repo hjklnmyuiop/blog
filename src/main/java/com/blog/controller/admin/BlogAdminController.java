@@ -3,8 +3,8 @@ package com.blog.controller.admin;
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.blog.elastic.BlogEs;
 import com.blog.entity.Blog;
-import com.blog.lucene.BlogIndex;
 import com.blog.service.BlogService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,7 +21,7 @@ public class BlogAdminController {
     @Resource
     private BlogService blogService;
     @Resource
-    private BlogIndex blogIndex;
+    private BlogEs blogEs;
 
     @RequestMapping("writeBlog")
     public String writeBlog(){
@@ -39,7 +39,7 @@ public class BlogAdminController {
         try {
             //调用新增博客的方法
             int count = blogService.addBlog(blog);
-            blogIndex.addIndex(blog);
+            blogEs.addBlog(blog);
             if(count>0){
                 map.put("success",true);//发布成功
             }else {

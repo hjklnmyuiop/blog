@@ -4,8 +4,6 @@ package com.blog.controller.foreign;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.blog.entity.Blog;
 import com.blog.entity.Comment;
-//import com.blog.lucene.BlogIndex;
-import com.blog.lucene.BlogIndex;
 import com.blog.service.BlogService;
 import com.blog.service.CommentService;
 import com.blog.utils.SysConstant;
@@ -31,14 +29,10 @@ public class BlogController {
 
     @Resource
     private BlogService blogService;
-    @Resource
-    private BlogIndex blogIndex;
 
     @Resource
     private CommentService commentService;
 
-//    @Resource
-//    private BlogIndex blogIndex;
 
     @ResponseBody
     @RequestMapping("/blogDateList")
@@ -157,22 +151,22 @@ public class BlogController {
 
     @RequestMapping("/query")
     public String query(String keyWord, @RequestParam(required = false,defaultValue = "1") Integer page, Model model){
-        try {
-            //每页显示的数量
-            int pageSize =3;
-            //调用查询博客的方法
-            List<Blog> blogList = blogIndex.searchIndex(keyWord);
-            //计算集合中的分页
-            Integer toIndex = blogList.size() >= page * pageSize ? page * pageSize : blogList.size();
-            //将数据放到模型中subList(参数1：开始的下标位置 参数2：结束位置)
-            model.addAttribute("blogList",blogList.subList((page-1)*pageSize,toIndex));
-            model.addAttribute("total",blogList.size());//查询的结果数量
-            model.addAttribute("keyWord",keyWord);
-            model.addAttribute("pageContent","foreign/blog/result");
-            model.addAttribute("pageCode",getUpAndDownPageCode(page,pageSize,blogList.size(),keyWord));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        try {
+//            //每页显示的数量
+//            int pageSize =3;
+//            //调用查询博客的方法
+//            List<Blog> blogList = blogIndex.searchIndex(keyWord);
+//            //计算集合中的分页
+//            Integer toIndex = blogList.size() >= page * pageSize ? page * pageSize : blogList.size();
+//            //将数据放到模型中subList(参数1：开始的下标位置 参数2：结束位置)
+//            model.addAttribute("blogList",blogList.subList((page-1)*pageSize,toIndex));
+//            model.addAttribute("total",blogList.size());//查询的结果数量
+//            model.addAttribute("keyWord",keyWord);
+//            model.addAttribute("pageContent","foreign/blog/result");
+//            model.addAttribute("pageCode",getUpAndDownPageCode(page,pageSize,blogList.size(),keyWord));
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
         return "index";
     }
 }

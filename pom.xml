@@ -16,6 +16,7 @@
     <description>Demo project for Spring Boot</description>
     <properties>
         <java.version>1.8</java.version>
+        <elasticsearch.version>7.8.0</elasticsearch.version>
     </properties>
     <dependencies>
         <dependency>
@@ -124,22 +125,27 @@
 
         <!-- 添加lucene相关依赖 -->
         <!-- lucene -->
-        <dependency>
-            <groupId>org.apache.lucene</groupId>
-            <artifactId>lucene-core</artifactId>
-            <version>7.4.0</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.apache.lucene</groupId>-->
+<!--            <artifactId>lucene-core</artifactId>-->
+<!--            <version>7.4.0</version>-->
+<!--        </dependency>-->
         <!-- queryparser -->
-        <dependency>
-            <groupId>org.apache.lucene</groupId>
-            <artifactId>lucene-queryparser</artifactId>
-            <version>7.4.0</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.apache.lucene</groupId>-->
+<!--            <artifactId>lucene-queryparser</artifactId>-->
+<!--            <version>7.4.0</version>-->
+<!--        </dependency>-->
         <!-- lucene-highlighter 高亮显示 -->
+<!--        <dependency>-->
+<!--            <groupId>org.apache.lucene</groupId>-->
+<!--            <artifactId>lucene-highlighter</artifactId>-->
+<!--            <version>7.4.0</version>-->
+<!--        </dependency>-->
+        <!--        集成es-->
         <dependency>
-            <groupId>org.apache.lucene</groupId>
-            <artifactId>lucene-highlighter</artifactId>
-            <version>7.4.0</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-elasticsearch</artifactId>
         </dependency>
     </dependencies>
 
