@@ -13,7 +13,7 @@ blog是基于SpringBoot快速开发的框架，主要设计为个人博客后台
 - 1、语言：基于JDK11进行开发
 - 2、Web框架：采用SpringBoot-2.4.5.RELEASE版本进行开发，thymeleaf
 - 3、ORM框架：ORM使用Mybatis框架进行集成开发，mybatis plus 3.11
-- 4、中间件：Redis、MySQ、lucene 等
+- 4、中间件：Redis、MySQ、elasticSearch 等
 
 ### 1.3 能力
 
@@ -22,6 +22,7 @@ blog是基于SpringBoot快速开发的框架，主要设计为个人博客后台
 - 3、提供全文检索、数据统计功能：基于Elasticsearch7.x(最新版本)，并且兼容5.x-7.x之间所有的ES版本
 - 4、全局告警：在产生异常请求日志或者触发其它策略时，提供告警接口：邮件告警、短信告警、钉钉告警数据推送等
 - 5、使用Mybatis，使用JPA快速开发简单业务，使用传统XML开发核心业务，简单易扩展，包括多数据源方案等
+- 6、使用elasticSearch7.8作为存储
 
 ## 二、更新记录
 
@@ -40,3 +41,4 @@ https://www.springcloud.cc/spring-boot.html
 - 2、前台首页列表展示，详情展示功能，增加评论功能。
 - 3、后台管理功能
 - 4、配置多数据源
+- 5、配置elastic，blog模块同时保持在mysql与elastic中
