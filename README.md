@@ -42,3 +42,4 @@ https://www.springcloud.cc/spring-boot.html
 - 3、后台管理功能
 - 4、配置多数据源
 - 5、配置elastic，blog模块同时保持在mysql与elastic中
+- 6、配置了邮件系统，可以发送附件图片。
