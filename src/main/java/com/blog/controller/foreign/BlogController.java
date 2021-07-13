@@ -2,6 +2,7 @@ package com.blog.controller.foreign;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.blog.elastic.BlogEs;
 import com.blog.entity.Blog;
 import com.blog.entity.Comment;
 import com.blog.service.BlogService;
@@ -13,7 +14,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
 
 import javax.annotation.Resource;
+import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -32,6 +35,8 @@ public class BlogController {
 
     @Resource
     private CommentService commentService;
+    @Resource
+    private BlogEs blogEs;
 
 
     @ResponseBody
@@ -148,9 +153,27 @@ public class BlogController {
 
         return pageCode.toString();
     }
-
     @RequestMapping("/query")
-    public String query(String keyWord, @RequestParam(required = false,defaultValue = "1") Integer page, Model model){
+    public Object query(@RequestParam("keyWord")  String keyword, @RequestParam(required = false,defaultValue = "0") Integer page, Model model) throws IOException {
+        int pageSize = 1;
+        int pageNo = page>0 ? page * pageSize : 0;
+//        System.out.println(toIndex);
+//        System.out.println(page);
+        List<Map<String, Object>> blogList = blogEs.searchPage(keyword, pageNo, pageSize);
+        System.out.println(blogList.size());
+        //将数据放到模型中subList(参数1：开始的下标位置 参数2：结束位置)
+        model.addAttribute("blogList",blogList);
+        model.addAttribute("total",blogList.size());//查询的结果数量
+        model.addAttribute("keyWord",keyword);
+        model.addAttribute("pageContent","foreign/blog/result");
+        model.addAttribute("pageCode",getUpAndDownPageCode(page,pageSize,blogList.size(),keyword));
+        return "index";
+    }
+
+    @RequestMapping("/queryIK")
+    public String queryIK(String keyWord, @RequestParam(required = false,defaultValue = "1") Integer page, Model model) throws IOException {
+//        int pageSize = 10;
+//        List<Map<String, Object>> list = blogEs.searchPage(keyWord, page, pageSize);
 //        try {
 //            //每页显示的数量
 //            int pageSize =3;
@@ -167,7 +190,7 @@ public class BlogController {
 //        } catch (Exception e) {
 //            e.printStackTrace();
 //        }
-        return "index";
+        return "es";
     }
 }
 

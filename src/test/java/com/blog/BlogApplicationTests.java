@@ -1,5 +1,6 @@
 package com.blog;
 
+import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.blog.elastic.BlogEs;
@@ -32,6 +33,7 @@ import javax.annotation.Resource;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 @SpringBootTest
 class BlogApplicationTests {
@@ -50,8 +52,11 @@ class BlogApplicationTests {
     }
     @Test
     public void testUpdateIndex() throws Exception {
-        Blog blogById = blogService.findBlogById(108);
-        blogEs.editBlog(blogById);
+        Blog blogById = blogService.findBlogById(110);
+        String id=String.valueOf(blogById.getId());
+//        ObjectMapper mapper = new ObjectMapper();
+//        String userJson = mapper.writeValueAsString(blogById);
+        blogEs.editBlog(id, JSON.toJSONString(blogById));
     }
     @Test
     public void testDelIndex() throws IOException {
@@ -67,27 +72,30 @@ class BlogApplicationTests {
         IndexRequest request = new IndexRequest();
         //分页查询
         int current=1;
-        int size =100;
+        int size =1000;
         Blog blog = new Blog();
         Page<Blog> page = new Page<Blog>(current,size);
         IPage<Blog> blogIPage = blogService.findBlogByPage(page,blog);
         //获取博客数据列表
         List<Blog> blogList = blogIPage.getRecords();
-        for (Blog item:blogList) {
-            Integer id = item.getId();
-            request.index("blog_index").id(String.valueOf(id));
-            // 向ES插入数据，必须将数据转换位JSON格式
-            ObjectMapper mapper = new ObjectMapper();
-            String userJson = mapper.writeValueAsString(item);
-            request.source(userJson, XContentType.JSON);
-            IndexResponse response = client.index(request, RequestOptions.DEFAULT);
-            System.out.println(response.getResult());
-        }
+        blogEs.bluckBlog(blogList);
+//        for (Blog item:blogList) {
+//            System.out.println(item);
+//            Integer id = item.getId();
+//            request.index("blog_index").id(String.valueOf(id));
+//            // 向ES插入数据，必须将数据转换位JSON格式
+//            ObjectMapper mapper = new ObjectMapper();
+//            String userJson = mapper.writeValueAsString(item);
+//            System.out.println(userJson);
+//            request.source(userJson, XContentType.JSON);
+//            IndexResponse response = client.index(request, RequestOptions.DEFAULT);
+//            System.out.println(response.getResult());
+//        }
         //查看详情
 //        Blog blog = blogService.findBlogById(39);
 //        blog.setReleaseDateStr(dates.format(blog.getReleaseDate(),'yyyy-MM-dd HH:mm:ss'));
 
-        client.close();
+//        client.close();
     }
     @Test
     public void testGetDoc() throws IOException {
@@ -97,6 +105,15 @@ class BlogApplicationTests {
         GetResponse response = client.get(request, RequestOptions.DEFAULT);
         System.out.println(response.getSourceAsString());
         client.close();
+    }
+    @Test
+    public void testSearchLight() throws IOException {
+        // 查询数据
+        String keyword = "java";
+        int pageNo = 4;
+        int pageSize = 2;
+        List<Map<String, Object>> list = blogEs.searchPage(keyword, pageNo, pageSize);
+        System.out.println(list);
     }
     @Test
     public void testSearchDoc() throws IOException {

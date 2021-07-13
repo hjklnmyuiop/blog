@@ -7,6 +7,7 @@ import com.blog.elastic.BlogEs;
 import com.blog.entity.Blog;
 import com.blog.service.BlogService;
 import com.blog.service.CommentService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -127,7 +128,11 @@ public class BlogAdminController {
             //调用修改博客信息的方法
             int count = blogService.updateBlog(blog);
             //更新索引库信息
-            blogEs.editBlog(blog);
+            String id=String.valueOf(blog.getId());
+//            ObjectMapper mapper = new ObjectMapper();
+            Blog blog1 = blogService.findBlogById(blog.getId());
+            blogEs.editBlog(id, JSON.toJSONString(blog1));
+//            blogEs.editBlog(id,JSON.toJSONString(blog1));
             if(count>0){//修改成功
                 //保存修改成功的状态
                 map.put("success",true);
