@@ -31,4 +31,11 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
         queryWrapper.eq("state",state);//审核状态
         return commentMapper.selectList(queryWrapper);
     }
+//    @Override
+    public int deleteCommentByBlogId(int blogId) throws Exception {
+        QueryWrapper<Comment> queryWrapper = new QueryWrapper<Comment>();
+        //博客id，参数1是列名
+        queryWrapper.eq("blogId",blogId);
+        return commentMapper.delete(queryWrapper);
+    }
 }

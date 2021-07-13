@@ -2,6 +2,7 @@ package com.blog;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.blog.elastic.BlogEs;
 import com.blog.entity.Blog;
 import com.blog.service.BlogService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -39,12 +40,18 @@ class BlogApplicationTests {
     private RestHighLevelClient client;
     @Resource
     private BlogService blogService;
-
+    @Resource
+    private BlogEs blogEs;
     @Test
     public void testCreateIndex() throws IOException {
         CreateIndexRequest request =  new CreateIndexRequest("blog_index");
         CreateIndexResponse createIndexResponse =  client.indices().create(request, RequestOptions.DEFAULT);
         System.out.println(createIndexResponse);
+    }
+    @Test
+    public void testUpdateIndex() throws Exception {
+        Blog blogById = blogService.findBlogById(108);
+        blogEs.editBlog(blogById);
     }
     @Test
     public void testDelIndex() throws IOException {

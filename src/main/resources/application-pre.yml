@@ -1,5 +1,5 @@
 server:
-  port: 8090
+  port: 8092
 spring:
   mail:
     host: smtp.exmail.qq.com
@@ -8,8 +8,6 @@ spring:
     password: Er309uFs
     protocol: smtp
     default-encoding: utf-8
-  profiles:
-    active: dev
   datasource:
   #数据源基本配置
 #    username: root
@@ -35,7 +33,6 @@ spring:
   #thymeleaf缓存关闭
   thymeleaf:
     cache: false
-
 mybatis-plus:
   type-aliases-package: com.blog.entiy
   #加载mybatis映射文件
