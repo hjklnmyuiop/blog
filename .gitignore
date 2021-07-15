@@ -1,0 +1,7 @@
+/target
+/blog.iml
+/src/main/resources/application.properties
+/src/main/resources/application.yml
+/src/main/resources/application-dev.yml
+/src/main/resources/application-pre.yml
+/src/test/java/com/blog/TestMP.java
