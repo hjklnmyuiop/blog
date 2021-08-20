@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>写博客</title>
+    <link rel="stylesheet" type="text/css" href="/source/easyui/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="/source/easyui/themes/icon.css">
+    <script type="text/javascript" src="/source/easyui/jquery.min.js"></script>
+    <script type="text/javascript" src="/source/easyui/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="/source/easyui/easyui-lang-zh_CN.js"></script>
+    <script type="text/javascript">
+
+
+        function submitData() {
+            //获取标题
+            var typeName = $("#typeName").textbox("getValue");
+            //获取关键字
+            var orderNo = $("#orderNo").textbox("getValue");
+            //非空验证
+            if (typeName.length == 0) {
+                $.messager.alert("系统提示", "博客类型不能为空！", "info");
+            } else {
+                //提交到服务器的参数列表
+                var param = {
+                    "typeName": typeName,
+                    "orderNo": orderNo
+                };
+                //发送提交请求
+                $.post("/admin/blogtype/addType", param, function (data) {
+                    if (data.success) {
+                        $.messager.show({
+                            title: '系统提示',
+                            msg: '类型添加成功',
+                            timeout: 3000,
+                            showType: 'slide'
+                        });
+                        //将表单清空
+                        resultValue();
+                    }else{
+                        $.messager.show({
+                            title: '系统提示',
+                            msg: '类型添加失败',
+                            timeout: 3000,
+                            showType: 'slide'
+                        });
+                    }
+                }, "json");
+            }
+
+        }
+
+        /**
+         * 清空表单
+         */
+        function resultValue(){
+            $("#typeName").textbox("setValue","");
+            $("#orderNo").textbox("setValue","");
+        }
+    </script>
+</head>
+<body style="margin: 10px">
+
+<div id="p" class="easyui-panel" title="编写类型" style="padding: 10px;width: 99%">
+    <table cellspacing="20px">
+        <tr>
+            <td width="80px">类型名称：</td>
+            <td>
+                <input class="easyui-textbox" type="text" id="typeName" name="typeName" style="width: 400px" required/>
+            </td>
+        </tr>
+        <tr>
+            <td>排序：</td>
+            <td>
+                <input class="easyui-textbox" type="text" id="orderNo" name="orderNo" style="width: 400px"/>&nbsp;
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <a href="javascript:submitData()" class="easyui-linkbutton"
+                   data-options="iconCls:'icon-submit'">添加类型</a>
+            </td>
+        </tr>
+    </table>
+</div>
+
+</body>
+</html>

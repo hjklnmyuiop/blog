@@ -41,4 +41,16 @@ public class DataSourceConfig {
     public DataSource ds2DataSource(@Qualifier("ds2DataSourceProperties") DataSourceProperties dataSourceProperties) {
         return dataSourceProperties.initializeDataSourceBuilder().build();
     }
+    //第二个ds2数据源配置
+    @Bean(name = "ds3DataSourceProperties")
+    @ConfigurationProperties(prefix = "spring.datasource.ds3")
+    public DataSourceProperties ds32DataSourceProperties() {
+        return new DataSourceProperties();
+    }
+
+    //第二个ds2数据源
+    @Bean("ds3DataSource")
+    public DataSource ds3DataSource(@Qualifier("ds3DataSourceProperties") DataSourceProperties dataSourceProperties) {
+        return dataSourceProperties.initializeDataSourceBuilder().build();
+    }
 }

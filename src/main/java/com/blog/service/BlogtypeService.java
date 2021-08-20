@@ -1,9 +1,9 @@
 package com.blog.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.blog.entity.Blogtype;
 import com.baomidou.mybatisplus.extension.service.IService;
 
-import java.util.List;
 
 /**
  * <p>
@@ -20,4 +20,15 @@ public interface BlogtypeService extends IService<Blogtype> {
      * @throws Exception
      */
     String getBlogTypeNameAndBlogCount() throws Exception;
+
+
+    /**
+     * 新增博客
+     * @param blogtype
+     * @return
+     * @throws Exception
+     */
+    int addBlogtype(Blogtype blogtype) throws Exception;
+
+    IPage<Blogtype> findBlogTypeByPage(IPage<Blogtype> page, Blogtype blogtype);
 }

@@ -19,18 +19,18 @@ public class MailServiceTest {
 //        mailService.sendSimpleMail("Dev_guo@patazon.net","测试spring boot imail-主题","测试spring boot imail - 内容");
 //    }
 //
-//    @Test
-//    public void sendHtmlMail() throws  MessagingException {
-//
-//        String content = "<html>\n" +
-//                "<body>\n" +
-//                "<h3>hello world</h3>\n" +
-//                "<h1>html</h1>\n" +
-//                "<body>\n" +
-//                "</html>\n";
-//
-//        mailService.sendHtmlMail("Dev_guo@patazon.net","这是一封HTML邮件",content);
-//    }
+    @Test
+    public void sendHtmlMail() throws  MessagingException {
+
+        String content = "<html>\n" +
+                "<body>\n" +
+                "<h3>hello world</h3>\n" +
+                "<h1>html</h1>\n" +
+                "<body>\n" +
+                "</html>\n";
+
+        mailService.sendHtmlMail("Dev_guo@patazon.net","这是一封HTML邮件",content);
+    }
 
 //    @Test
 //    public void sendAttachmentsMail() throws MessagingException {

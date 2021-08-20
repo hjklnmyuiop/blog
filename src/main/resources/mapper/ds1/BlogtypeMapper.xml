@@ -21,8 +21,18 @@
             LEFT JOIN t_blog b ON t.`id` = b.`typeId`
             GROUP BY t.`id`
     </select>
-    
-    
+
+    <!-- 分页查询博客信息 -->
+    <select id="findBlogTypeByPage" resultType="com.blog.entity.Blogtype">
+        select * from  t_blogtype
+        <where>
+            <if test="blogtype.typeName!=null and blogtype.typeName!=''">
+                and  typeName like concat('%',#{blogtype.typeName},'%')
+            </if>
+
+        </where>
+        order by orderNo desc
+    </select>
     
     
     

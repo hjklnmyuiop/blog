@@ -30,7 +30,7 @@ public class BlogAdminController {
 
     @RequestMapping("writeBlog")
     public String writeBlog(){
-        return "admin/writeBlog";
+        return "admin/blog/writeBlog";
     }
     /**
      * 发布博客
@@ -58,7 +58,7 @@ public class BlogAdminController {
     }
     @RequestMapping("blogManage")
     public String blogManage(){
-        return "admin/blogManage";
+        return "admin/blog/blogManage";
     }
     @ResponseBody
     @RequestMapping("/list")
@@ -104,7 +104,7 @@ public class BlogAdminController {
     public String toUpdateBlog(int blogId, Model model){
         //将当前博客id存放到模型中
         model.addAttribute("blogId",blogId);//因为修改博客页面存在一个隐藏域保存博客id
-        return "admin/modifyBlog";
+        return "admin/blog/modifyBlog";
     }
 
     @ResponseBody

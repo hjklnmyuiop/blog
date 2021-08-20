@@ -7,6 +7,7 @@ import com.blog.elastic.BlogEs;
 import com.blog.entity.Blog;
 import com.blog.service.BlogService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.jsonwebtoken.*;
 import org.elasticsearch.action.admin.indices.delete.DeleteIndexRequest;
 import org.elasticsearch.action.get.GetRequest;
 import org.elasticsearch.action.get.GetResponse;
@@ -31,9 +32,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.annotation.Resource;
 import java.io.IOException;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @SpringBootTest
 class BlogApplicationTests {
@@ -147,4 +146,35 @@ class BlogApplicationTests {
 //        client.close();
 //
 //    }
+    @Test
+    public void jwt(){
+//        long time= 1000*60*60*24;
+        String signature = "dev_guo";
+        JwtBuilder jwtBuilder = Jwts.builder();
+        String jwtToken = jwtBuilder.
+                //header
+                setHeaderParam("typ","JWT").
+                setHeaderParam("alg","HS256")
+                //payload
+                .claim("name","dev_guo")
+                .claim("role","admin")
+                .setSubject("admin-test")
+//                .setExpiration(new Date(System.currentTimeMillis()+time))
+                .setId(UUID.randomUUID().toString())
+                .signWith(SignatureAlgorithm.HS256,signature)
+                .compact();
+        System.out.println(jwtToken);
+    }
+    @Test
+    public void parse(){
+        String token="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiZGV2X2d1byIsInJvbGUiOiJhZG1pbiIsInN1YiI6ImFkbWluLXRlc3QiLCJqdGkiOiJiNWE1MmYxNS01NDM3LTQ4MmItOTc5NC1lODg0ZGZmZjM4ZmIifQ.Y8Ahv9kOTr-lcsUhfUxu7QQWKWC6fmm-27Gk9sW6Wco";
+        String signature = "dev_guo";
+        JwtParser jwtParser = Jwts.parser();
+        Jws<Claims> claimsJws = jwtParser.setSigningKey(signature).parseClaimsJws(token);
+        Claims claims = claimsJws.getBody();
+        System.out.println(claims.get("name"));
+        System.out.println(claims.get("role"));
+        System.out.println(claims.getId());
+        System.out.println(claims.getSubject());
+    }
 }
